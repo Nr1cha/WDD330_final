@@ -10,7 +10,7 @@ async function apiFetch() {
     try {
         const response = await fetch(url);
         if (response.ok) {
-            const data = await response.json();        
+            const data = await response.json();
             return data; //added this here.
         } else {
             throw Error(await response.text());
@@ -23,10 +23,24 @@ async function apiFetch() {
 // display the results in the weather cell section
 function displayResults(weatherdata) {
     // console.log(weatherdata);
-    const currentTemp = document.querySelector(""); // current temp
-    const weatherIcon = document.querySelector(""); // icon
-    const captionDesc = document.querySelector(""); // caption
-    const windSpeed = document.querySelector(""); // wind info
+    const weatherContainer = document.querySelector("#weather-container"); // get the parent container
+
+    // creating child elements
+    const weatherIcon = document.createElement("p");
+    const currentTemp = document.createElement("p");
+    const windSpeed = document.createElement("p");
+    const captionDesc = document.createElement("p");
+
+    // append the elements to the parent element
+    weatherContainer.appendChild(weatherIcon);
+    weatherContainer.appendChild(currentTemp);
+    weatherContainer.appendChild(windSpeed);
+    weatherContainer.appendChild(captionDesc);
+
+
+
+
+
     // const windChill = document.querySelector("wind-chill");
 
     // adding data from the API to the page
