@@ -5,6 +5,18 @@ async function getUserSearchValue(){
     return userValue;
 };
 
+const goButton = document.querySelector('#searchButton');
+const goInput = document.querySelector('#searchBox');
+
+goButton.addEventListener("click", getUserSearchValue);
+goInput.addEventListener("keypress", (e) => {
+    if(e.key === 'Enter') {
+        getUserSearchValue();
+    }
+});
+
+// atta
+
 //https://openweathermap.org/current#name
 // API URL
 async function apiFetch(userValue = 'seattle') {
