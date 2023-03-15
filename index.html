@@ -13,9 +13,9 @@
         <!-- search bar -->
         <div id="search" class="search">
             <input type="text" placeholder="Search City or Zip Code">
-            <button type="submit">Go</button>
+            <button type="submit" onclick="displayResults()">Go</button>
         </div>
-        
+
         <h1>Weather App</h1>
 
         <!-- dropdown -->
@@ -25,12 +25,20 @@
         </select>
     </header>
 
+    <!-- weather section -->
     <div id="weather-container"></div>
 
 
     <footer>
         <p>Nick Richards | WDD 330 | 2023</p>
     </footer>
+    <script src="./Scripts/weatherApi.js"></script> <!-- javascript portion-->
+    <!-- <script>
+        const weatherContainer = document.querySelector(".weather-container"); // get the parent container
+        const weatherIcon = document.createElement("p");
+        weatherIcon.classList.add("weather-icon");
+        weatherContainer.appendChild(weatherIcon);
+    </script> -->
 </body>
 
 </html>
