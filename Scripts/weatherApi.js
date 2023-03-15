@@ -26,16 +26,18 @@ function displayResults(weatherdata) {
     const weatherContainer = document.querySelector("#weather-container"); // get the parent container
 
     // creating child elements
-    const weatherIcon = document.createElement("p");
+    const weatherIcon = document.createElement("img");
     const currentTemp = document.createElement("p");
     const windSpeed = document.createElement("p");
     const captionDesc = document.createElement("p");
-
+    
     // add a class name to each created element
     weatherIcon.classList.add("weather-icon");
+    weatherIcon.setAttribute("src",`https://openweathermap.org/img/wn/${weatherdata.weather[0].icon}@2x.png`);
     currentTemp.classList.add("current-temp");
     windSpeed.classList.add("wind-speed");
     captionDesc.classList.add("caption-desc");
+
 
     // append the elements to the parent element
     weatherContainer.appendChild(weatherIcon);
@@ -47,15 +49,15 @@ function displayResults(weatherdata) {
 
     // adding data from the API to the page
     const currentTempFixed = weatherdata.main.temp.toFixed(0);
-    currentTemp.textContent = currentTempFixed;
+    currentTemp.textContent = "Current Temperature: " + currentTempFixed;
 
     const windSpeedFixed = weatherdata.wind.speed.toFixed(0);
-    windSpeed.textContent = windSpeedFixed;
+    windSpeed.textContent = "WindSpeed: " + windSpeedFixed;
     // console.log(weatherdata.wind.speed, weatherdata.main.temp, windChill )
-    windChill(weatherdata.wind.speed, weatherdata.main.temp);
+    // windChill(weatherdata.wind.speed, weatherdata.main.temp);
 
-    weatherIcon.src = `https://openweathermap.org/img/wn/${weatherdata.weather[0].icon}@2x.png`;
-    captionDesc.textContent = weatherdata.weather[0].description;
+    // weatherIcon.src = `https://openweathermap.org/img/wn/${weatherdata.weather[0].icon}@2x.png`;
+    captionDesc.textContent = "Description: " + weatherdata.weather[0].description;
 }
 
 async function init() {
