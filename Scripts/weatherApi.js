@@ -31,6 +31,12 @@ function displayResults(weatherdata) {
     const windSpeed = document.createElement("p");
     const captionDesc = document.createElement("p");
 
+    // add a class name to each created element
+    weatherIcon.classList.add("weather-icon");
+    currentTemp.classList.add("current-temp");
+    windSpeed.classList.add("wind-speed");
+    captionDesc.classList.add("caption-desc");
+
     // append the elements to the parent element
     weatherContainer.appendChild(weatherIcon);
     weatherContainer.appendChild(currentTemp);
