@@ -1,13 +1,15 @@
-// select HTML elements in the document
-// how to search by city name and or zip code
+async function getUserSearchValue(){
+    let userValue = document.querySelector("#searchBox").value;
+    const data = await apiFetch(userValue);
+    displayResults(data);
+    return userValue;
+};
+
 //https://openweathermap.org/current#name
 // API URL
-const url =
-    "https://api.openweathermap.org/data/2.5/weather?q=seattle&appid=72c90fbdfbdb409e818bc324052dfcd3"; //WDD330 API key
-// const page = document.querySelector("");
-
-async function apiFetch() {
+async function apiFetch(userValue = 'seattle') {
     try {
+        const url =`https://api.openweathermap.org/data/2.5/weather?q=${userValue}&appid=72c90fbdfbdb409e818bc324052dfcd3`;
         const response = await fetch(url);
         if (response.ok) {
             const data = await response.json();
@@ -61,7 +63,7 @@ function displayResults(weatherdata) {
 }
 
 async function init() {
-    const data = await apiFetch();
+    const data = await apiFetch('seattle');
     displayResults(data);
 }
 init();
