@@ -3,7 +3,7 @@
 //https://openweathermap.org/current#name
 // API URL
 const url =
-    "https://api.openweathermap.org/data/2.5/weather?lat=41.034878&lon=-111.938644&units=imperial&appid=72c90fbdfbdb409e818bc324052dfcd3"; //WDD330 API key
+    "https://api.openweathermap.org/data/2.5/weather?q=seattle&appid=72c90fbdfbdb409e818bc324052dfcd3"; //WDD330 API key
 // const page = document.querySelector("");
 
 async function apiFetch() {
