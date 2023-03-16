@@ -9,8 +9,8 @@ const goButton = document.querySelector('#searchButton');
 const goInput = document.querySelector('#searchBox');
 
 goButton.addEventListener("click", getUserSearchValue);
-goInput.addEventListener("keypress", (e) => {
-    if(e.key === 'Enter') {
+goInput.addEventListener("keypress", (event) => {
+    if(event.key === 'Enter') {
         getUserSearchValue();
     }
 });
