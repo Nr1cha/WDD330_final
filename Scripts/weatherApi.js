@@ -21,7 +21,7 @@ goInput.addEventListener("keypress", (event) => {
 // API URL
 async function apiFetch(userValue = 'seattle') {
     try {
-        const url =`https://api.openweathermap.org/data/2.5/weather?q=${userValue}&appid=72c90fbdfbdb409e818bc324052dfcd3`;
+        const url =`https://api.openweathermap.org/data/2.5/weather?q=${userValue}&units=imperial&appid=72c90fbdfbdb409e818bc324052dfcd3`;
         const response = await fetch(url);
         if (response.ok) {
             const data = await response.json();
@@ -63,10 +63,10 @@ function displayResults(weatherdata) {
 
     // adding data from the API to the page
     const currentTempFixed = weatherdata.main.temp.toFixed(0);
-    currentTemp.textContent = "Current Temperature: " + currentTempFixed;
+    currentTemp.textContent = `Current Temperature: ${currentTempFixed}\u00B0F`;
 
     const windSpeedFixed = weatherdata.wind.speed.toFixed(0);
-    windSpeed.textContent = "WindSpeed: " + windSpeedFixed;
+    windSpeed.textContent = `WindSpeed: ${windSpeedFixed} \u006D\u0070\u0068`;
     // console.log(weatherdata.wind.speed, weatherdata.main.temp, windChill )
     // windChill(weatherdata.wind.speed, weatherdata.main.temp);
 
