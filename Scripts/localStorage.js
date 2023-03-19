@@ -3,6 +3,10 @@ const todayDisplayDate = document.querySelector("");
 const visitsDisplay = document.querySelector("");
 const latestVisit = document.querySelector("");
 
+// get items from weather page
+const searchFavorite = document.querySelector("#addToFav");
+const favoritesList = document.querySelector("#favList");
+
 // get the stored value in localStorage
 let numVisits = Number(window.localStorage.getItem(""));
 
