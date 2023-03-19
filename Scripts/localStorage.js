@@ -1,13 +1,13 @@
 // initialize display elements
-const todayDisplay = document.querySelector(".today");
-const visitsDisplay = document.querySelector(".visits");
-const latestVisit = document.querySelector(".nowvisit");
+const todayDisplay = document.querySelector("");
+const visitsDisplay = document.querySelector("");
+const latestVisit = document.querySelector("");
 
 // get the stored value in localStorage
-let numVisits = Number(window.localStorage.getItem("visits-ls"));
+let numVisits = Number(window.localStorage.getItem(""));
 
 // last visit timestamp
-let lastVisit = Number(window.localStorage.getItem("nowvisit-ls"));
+let lastVisit = Number(window.localStorage.getItem(""));
 
 // determine if this is the first visit or display the number of visits.
 if (numVisits !== 0) {
@@ -19,6 +19,6 @@ if (numVisits !== 0) {
 // increment the number of visits.
 numVisits++;
 // store the new number of visits value
-localStorage.setItem("visits-ls", numVisits);
+localStorage.setItem("", numVisits);
 // show todays date.
 todayDisplay.textContent = Date.now();
