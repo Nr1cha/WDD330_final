@@ -1,5 +1,5 @@
 // initialize display elements
-const todayDisplay = document.querySelector("");
+const todayDisplayDate = document.querySelector("");
 const visitsDisplay = document.querySelector("");
 const latestVisit = document.querySelector("");
 
@@ -21,4 +21,4 @@ numVisits++;
 // store the new number of visits value
 localStorage.setItem("", numVisits);
 // show todays date.
-todayDisplay.textContent = Date.now();
+todayDisplayDate.textContent = Date.now();
