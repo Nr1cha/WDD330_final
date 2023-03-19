@@ -44,6 +44,7 @@ function displayResults(weatherdata) {
     const currentTemp = document.createElement("p");
     const windSpeed = document.createElement("p");
     const captionDesc = document.createElement("p");
+    const sunRise = document.createElement("p");
     
     // add a class name to each created element
     weatherIcon.classList.add("weather-icon");
@@ -51,6 +52,7 @@ function displayResults(weatherdata) {
     currentTemp.classList.add("current-temp");
     windSpeed.classList.add("wind-speed");
     captionDesc.classList.add("caption-desc");
+    sunRise.classList.add("sunRise");
 
 
     // append the elements to the parent element
@@ -58,6 +60,7 @@ function displayResults(weatherdata) {
     weatherContainer.appendChild(currentTemp);
     weatherContainer.appendChild(windSpeed);
     weatherContainer.appendChild(captionDesc);
+    weatherContainer.appendChild(sunRise);
 
     // const windChill = document.querySelector("wind-chill");
 
@@ -72,6 +75,8 @@ function displayResults(weatherdata) {
 
     // weatherIcon.src = `https://openweathermap.org/img/wn/${weatherdata.weather[0].icon}@2x.png`;
     captionDesc.textContent = "Description: " + weatherdata.weather[0].description;
+    sunriseEpoch = new Date(weatherdata.sys.sunrise);
+    sunRise.textContent = "Sunrise: " + sunriseEpoch;
 }
 
 async function init() {
