@@ -15,6 +15,12 @@ goInput.addEventListener("keypress", (event) => {
     }
 });
 
+const favoritesListSearch = document.querySelector("#favList");
+favoritesListSearch.addEventListener("change",async(event) => {
+    const data = await apiFetch(favoritesList.value);
+    displayResults(data);
+    console.log(favoritesListSearch.value);
+})
 // atta
 
 //https://openweathermap.org/current#name

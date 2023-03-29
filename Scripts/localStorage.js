@@ -1,5 +1,3 @@
-let locationsList = [];
-
 // GETTING ITEMS FROM THE PAGE
 
 // city text field
@@ -12,11 +10,10 @@ const favButton = document.querySelector("#addToFav");
 favButton.addEventListener("click", function () {
     // get the value of the item typed
     let searchTerm = locationSearch.value;
-    // Add the search term to the locationsList array
-    locationsList.push(searchTerm);
-
+    
     // Log the array to the console
-    console.log(locationsList);
+    addToLocalStorage(searchTerm);
+	updateFavList();
 });
 
 // list of favorites that are from localStorage
@@ -25,9 +22,22 @@ const favoritesList = document.querySelector("#favList");
 // ADDING THINGS TO LOCAL STORAGE
 
 // store the city in text field to local storage
-localStorage.setItem("cityLocation", JSON.stringify(locationsList));
+function addToLocalStorage(searchTerm) {
+    let listItems = JSON.parse(localStorage.getItem("cityLocation"));
+	listItems.push(searchTerm);
+    localStorage.setItem("cityLocation", JSON.stringify(listItems));
+}
 
+function updateFavList() {
+    // get the stored value in localStorage
+    let listItems = JSON.parse(localStorage.getItem("cityLocation"));
+	favoritesList.options.length = 0;
+    for (let i = 0; i < listItems.length; i++) {
+        let option = document.createElement("option");
+        option.value = listItems[i];
+        option.text = listItems[i];
+        favoritesList.appendChild(option);
+    }
+}
+updateFavList();
 // GETTING THINGS FROM LOCAL STORAGE
-
-// get the stored value in localStorage
-let listItems = JSON.parse(localStorage.getItem("cityLocation"));
