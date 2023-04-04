@@ -70,8 +70,8 @@ function displayResults(weatherdata) {
         weatherContainer.appendChild(weatherBox);
         weatherBox.appendChild(weatherIcon);
         weatherBox.appendChild(currentTemp);
-        weatherBox.appendChild(windSpeed);
         weatherBox.appendChild(captionDesc);
+        weatherBox.appendChild(windSpeed);
         weatherBox.appendChild(humidity);
 
         // const windChill = document.querySelector("wind-chill");
@@ -86,8 +86,13 @@ function displayResults(weatherdata) {
         // windChill(day.wind.speed, day.main.temp);
 
         // weatherIcon.src = `https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`;
-        captionDesc.textContent =
-            "Description: " + day.weather[0].description;
+        const weatherDescription = day.weather[0].description;
+        const descriptionWords = weatherDescription.split(" ");
+
+        for (let i = 0; i < descriptionWords.length; i++) {
+            descriptionWords[i] = descriptionWords[i][0].toUpperCase() + descriptionWords[i].substr(1);
+        }
+        captionDesc.textContent = descriptionWords.join(" ");
 
         const humidity1 = day.main.humidity.toFixed(0);
         humidity.textContent = `Humidity: ${humidity1}\u0025`;
