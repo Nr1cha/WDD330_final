@@ -44,9 +44,10 @@ async function apiFetch(userValue = "seattle") {
 function displayResults(weatherdata) {
     // console.log(weatherdata);
     weatherdata.list.forEach((day) => {
-        const weatherContainer = document.querySelector("#weather-container"); // get the parent container
+        const weatherContainer = document.querySelector("#weather-item"); // get the parent container
 
         // creating child elements
+        const weatherBox = document.createElement("div")
         const weatherIcon = document.createElement("img");
         const currentTemp = document.createElement("p");
         const windSpeed = document.createElement("p");
@@ -55,6 +56,7 @@ function displayResults(weatherdata) {
 
         // add a class name to each created element
         weatherIcon.classList.add("weather-icon");
+
         weatherIcon.setAttribute(
             "src",
             `https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`
@@ -65,11 +67,12 @@ function displayResults(weatherdata) {
         sunRise.classList.add("sunRise");
 
         // append the elements to the parent element
-        weatherContainer.appendChild(weatherIcon);
-        weatherContainer.appendChild(currentTemp);
-        weatherContainer.appendChild(windSpeed);
-        weatherContainer.appendChild(captionDesc);
-        weatherContainer.appendChild(sunRise);
+        weatherContainer.appendChild(weatherBox);
+        weatherBox.appendChild(weatherIcon);
+        weatherBox.appendChild(currentTemp);
+        weatherBox.appendChild(windSpeed);
+        weatherBox.appendChild(captionDesc);
+        weatherBox.appendChild(sunRise);
 
         // const windChill = document.querySelector("wind-chill");
 

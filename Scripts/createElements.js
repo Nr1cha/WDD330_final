@@ -2,7 +2,7 @@
 const weatherData = [item1, item2, item3, item4, item5, item6, item7, item8];
 
 // Select the container element to add the list
-const container = document.getElementById("weather-container");
+const container = document.getElementById("weather-item");
 
 // Create an unordered list element and append it to the container
 const ul = document.createElement("ul");

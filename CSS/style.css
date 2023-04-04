@@ -23,3 +23,17 @@ h1 {
 #favList {
     margin-left: auto;
 }
+
+/* WEATHER BOXES */
+#weather-container {
+    background-color: rgb(190, 190, 192);
+    margin: 5px;
+    display: block;
+    text-align: center;
+}
+
+#weather-item > div {
+    margin: 15px;
+    background-image: radial-gradient( rgb(39,130,218),rgb(18, 73, 167));
+    padding: 5px;
+}
