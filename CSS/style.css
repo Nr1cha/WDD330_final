@@ -5,10 +5,12 @@ body {
 
 header {
     display: flex;
+    flex-direction: column;
     margin: 0 auto;
-    width: 95%;
+    width: 100%;
     background-color: #b6b3b3;
-    padding: 1.3rem;
+    padding-top: 1.3rem;
+    padding-bottom: 1.3rem;
     justify-content: center;
     align-items: center;
 }

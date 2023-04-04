@@ -5,7 +5,7 @@ async function getUserSearchValue() {
     return userValue;
 }
 
-const goButton = document.querySelector("#searchButton");
+const goButton = document.querySelector("#searchButton"); //SEARCH BUTTON
 const goInput = document.querySelector("#searchBox");
 
 goButton.addEventListener("click", getUserSearchValue);
