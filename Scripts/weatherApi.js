@@ -52,7 +52,7 @@ function displayResults(weatherdata) {
         const currentTemp = document.createElement("p");
         const windSpeed = document.createElement("p");
         const captionDesc = document.createElement("p");
-        const sunRise = document.createElement("p");
+        const humidity = document.createElement("p");
 
         // add a class name to each created element
         weatherIcon.classList.add("weather-icon");
@@ -64,7 +64,7 @@ function displayResults(weatherdata) {
         currentTemp.classList.add("current-temp");
         windSpeed.classList.add("wind-speed");
         captionDesc.classList.add("caption-desc");
-        sunRise.classList.add("sunRise");
+        humidity.classList.add("humidity");
 
         // append the elements to the parent element
         weatherContainer.appendChild(weatherBox);
@@ -72,24 +72,27 @@ function displayResults(weatherdata) {
         weatherBox.appendChild(currentTemp);
         weatherBox.appendChild(windSpeed);
         weatherBox.appendChild(captionDesc);
-        weatherBox.appendChild(sunRise);
+        weatherBox.appendChild(humidity);
 
         // const windChill = document.querySelector("wind-chill");
 
         // adding data from the API to the page
         const currentTempFixed = day.main.temp.toFixed(0);
-        currentTemp.textContent = `Current Temperature: ${currentTempFixed}\u00B0F`;
+        currentTemp.textContent = `${currentTempFixed}\u00B0F`;
 
         const windSpeedFixed = day.wind.speed.toFixed(0);
-        windSpeed.textContent = `WindSpeed: ${windSpeedFixed} \u006D\u0070\u0068`;
+        windSpeed.textContent = `Wind: ${windSpeedFixed} \u006D\u0070\u0068`;
         // console.log(day.wind.speed, day.main.temp, windChill )
         // windChill(day.wind.speed, day.main.temp);
 
         // weatherIcon.src = `https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`;
         captionDesc.textContent =
             "Description: " + day.weather[0].description;
-        sunriseEpoch = new Date(day.sys.sunrise);
-        sunRise.textContent = "Sunrise: " + sunriseEpoch;
+
+        const humidity1 = day.main.humidity.toFixed(0);
+        humidity.textContent = `Humidity: ${humidity1}\u0025`;
+        // sunriseEpoch = new Date(day.sys.sunrise);
+        // sunRise.textContent = "Sunrise: " + sunriseEpoch;
     });
 }
 
