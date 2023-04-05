@@ -25,9 +25,25 @@ favoritesListSearch.addEventListener("change", async (event) => {
 
 //https://openweathermap.org/current#name
 // API URL
+async function latLong(userValue = "seattle"){
+    try {
+        const url = `https://api.openweathermap.org/geo/1.0/direct?q=${userValue}&appid=72c90fbdfbdb409e818bc324052dfcd3&limit=1`; // get lat long
+        const response = await fetch(url);
+        if (response.ok) {
+            const data = await response.json();
+            return data; //added this here.
+        } else {
+            throw Error(await response.text());
+        }
+    } catch (error) {
+        console.log(error);
+    }
+
+}
 async function apiFetch(userValue = "seattle") {
     try {
-        const url = `https://api.openweathermap.org/data/2.5/forecast?q=${userValue}&units=imperial&appid=72c90fbdfbdb409e818bc324052dfcd3&cnt=8`;
+        const location = await latLong(userValue);
+        const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${location[0].lat}&lon=${location[0].lon}&units=imperial&appid=72c90fbdfbdb409e818bc324052dfcd3&cnt=8`;
         const response = await fetch(url);
         if (response.ok) {
             const data = await response.json();
@@ -43,7 +59,7 @@ async function apiFetch(userValue = "seattle") {
 // display the results in the weather cell section
 function displayResults(weatherdata) {
     // console.log(weatherdata);
-    weatherdata.list.forEach((day) => {
+    weatherdata.daily.forEach((day) => {
         const weatherContainer = document.querySelector("#weather-item"); // get the parent container
 
         // creating child elements
@@ -51,6 +67,7 @@ function displayResults(weatherdata) {
         const weatherIcon = document.createElement("img");
         const currentTemp = document.createElement("p");
         const maxTemp = document.createElement("p");
+        const lowTemp = document.createElement("p");
         const windSpeed = document.createElement("p");
         const captionDesc = document.createElement("p");
         const humidity = document.createElement("p");
@@ -64,7 +81,7 @@ function displayResults(weatherdata) {
         );
         currentTemp.classList.add("current-temp");
         maxTemp.classList.add("max-temp");
-
+        lowTemp.classList.add("low-temp");
         windSpeed.classList.add("wind-speed");
         captionDesc.classList.add("caption-desc");
         humidity.classList.add("humidity");
@@ -74,22 +91,26 @@ function displayResults(weatherdata) {
         weatherBox.appendChild(weatherIcon);
         weatherBox.appendChild(currentTemp);
         weatherBox.appendChild(maxTemp);
+        weatherBox.appendChild(lowTemp);
         weatherBox.appendChild(captionDesc);
         weatherBox.appendChild(windSpeed);
         weatherBox.appendChild(humidity);
 
         // ADDING DATA FROM THE API TO THE PAGE
-        const currentTempFixed = day.main.temp.toFixed(0);
+        const currentTempFixed = day.temp.day.toFixed(0);
         currentTemp.textContent = `${currentTempFixed}\u00B0F`;
 
         // TODO MAKE A HIGH TEMP
-        const maxTempFixed = day.main.temp_max.toFixed(0);
+        const maxTempFixed = day.temp.max.toFixed(0);
         maxTemp.textContent = `${maxTempFixed}\u00B0F`;
 
 
         // TODO MAKE A LOW TEMP
+        const lowTempFixed = day.temp.min.toFixed(0);
+        lowTemp.textContent = `${lowTempFixed}\u00B0F`;
 
-        const windSpeedFixed = day.wind.speed.toFixed(0);
+
+        const windSpeedFixed = day.wind_speed.toFixed(0);
         windSpeed.textContent = `Wind: ${windSpeedFixed} \u006D\u0070\u0068`;
         // windChill(day.wind.speed, day.main.temp);
 
@@ -101,7 +122,7 @@ function displayResults(weatherdata) {
         }
         captionDesc.textContent = descriptionWords.join(" ");
 
-        const humidity1 = day.main.humidity.toFixed(0);
+        const humidity1 = day.humidity.toFixed(0);
         humidity.textContent = `Humidity: ${humidity1}\u0025`;
         // sunriseEpoch = new Date(day.sys.sunrise);
         // sunRise.textContent = "Sunrise: " + sunriseEpoch;
