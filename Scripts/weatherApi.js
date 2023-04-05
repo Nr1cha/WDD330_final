@@ -72,6 +72,8 @@ function displayResults(weatherdata) {
         const captionDesc = document.createElement("p");
         const humidity = document.createElement("p");
         const sunRise = document.createElement("p");
+        const sunSet = document.createElement("p");
+
 
 
         // add a class name to each created element
@@ -87,6 +89,8 @@ function displayResults(weatherdata) {
         captionDesc.classList.add("caption-desc");
         humidity.classList.add("humidity");
         sunRise.classList.add("sunrise");
+        sunSet.classList.add("sunSet");
+
 
 
         // append the elements to the parent element
@@ -98,6 +102,8 @@ function displayResults(weatherdata) {
         weatherBox.appendChild(windSpeed);
         weatherBox.appendChild(humidity);
         weatherBox.appendChild(sunRise);
+        weatherBox.appendChild(sunSet);
+
 
 
         // ADDING DATA FROM THE API TO THE PAGE
@@ -130,7 +136,9 @@ function displayResults(weatherdata) {
 
 
         // sunset time
-
+        const sunsetEpoch = new Date(day.sunset);
+        const sunsetString = new Date(sunsetEpoch*1000).toLocaleTimeString('en-US', {hours: 'number'})
+        sunSet.textContent = `Sunset: ${sunsetString}`;
 
     });
 }
