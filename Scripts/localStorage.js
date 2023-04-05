@@ -23,14 +23,14 @@ const favoritesList = document.querySelector("#favList");
 
 // store the city in text field to local storage
 function addToLocalStorage(searchTerm) {
-    let listItems = JSON.parse(localStorage.getItem("cityLocation"));
+    let listItems = JSON.parse(localStorage.getItem("cityLocation")) ?? [];
 	listItems.push(searchTerm);
     localStorage.setItem("cityLocation", JSON.stringify(listItems));
 }
 
 function updateFavList() {
     // get the stored value in localStorage
-    let listItems = JSON.parse(localStorage.getItem("cityLocation"));
+    let listItems = JSON.parse(localStorage.getItem("cityLocation")) ?? [];
 	favoritesList.options.length = 0;
     for (let i = 0; i < listItems.length; i++) {
         let option = document.createElement("option");
