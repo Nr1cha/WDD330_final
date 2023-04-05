@@ -21,9 +21,7 @@ favoritesListSearch.addEventListener("change", async (event) => {
     displayResults(data);
     console.log(favoritesListSearch.value);
 });
-// atta
 
-//https://openweathermap.org/current#name
 // API URL
 async function latLong(userValue = "seattle"){
     try {
@@ -31,7 +29,7 @@ async function latLong(userValue = "seattle"){
         const response = await fetch(url);
         if (response.ok) {
             const data = await response.json();
-            return data; //added this here.
+            return data;
         } else {
             throw Error(await response.text());
         }
@@ -47,7 +45,7 @@ async function apiFetch(userValue = "seattle") {
         const response = await fetch(url);
         if (response.ok) {
             const data = await response.json();
-            return data; //added this here.
+            return data;
         } else {
             throw Error(await response.text());
         }
@@ -58,14 +56,10 @@ async function apiFetch(userValue = "seattle") {
 
 // display the results in the weather cell section
 function displayResults(weatherdata) {
-    const weatherContainer = document.querySelector("#weather-item"); // get the parent container
+    const weatherContainer = document.querySelector("#weather-item");
     weatherContainer.innerHTML = "";
-    // console.log(weatherdata);
-    // GET THE CURRENT TEMP FOR THE CURRENT DAY ONLY BUT OUTSIDE THE LOOP
-    
-    weatherdata.daily.forEach((day) => {
+    weatherdata.daily.forEach((day, index) => {
         
-        // creating child elements
         const weatherBox = document.createElement("div")
         const weatherIcon = document.createElement("img");
         const currentTemp = document.createElement("p");
@@ -78,9 +72,6 @@ function displayResults(weatherdata) {
         const sunRise = document.createElement("p");
         const sunSet = document.createElement("p");
 
-
-
-        // add a class name to each created element
         weatherIcon.classList.add("weather-icon");
 
         weatherIcon.setAttribute(
@@ -97,9 +88,6 @@ function displayResults(weatherdata) {
         sunRise.classList.add("sunrise");
         sunSet.classList.add("sunSet");
 
-
-
-        // append the elements to the parent element
         weatherContainer.appendChild(weatherBox);
         weatherBox.appendChild(weatherIcon);
         weatherBox.appendChild(currentTemp);
@@ -112,19 +100,20 @@ function displayResults(weatherdata) {
         weatherBox.appendChild(sunRise);
         weatherBox.appendChild(sunSet);
 
+        let currentTempFixed;
+        if(index === 0) {
+            currentTempFixed = weatherdata.current.temp.toFixed(0);
+        } else {
+            currentTempFixed = day.temp.day.toFixed(0);
+        }
 
-
-        // ADDING DATA FROM THE API TO THE PAGE
-        const currentTempFixed = day.temp.day.toFixed(0);
         currentTemp.textContent = `${currentTempFixed}\u00B0F`;
-
         const maxTempFixed = day.temp.max.toFixed(0);
         const lowTempFixed = day.temp.min.toFixed(0);
         maxMinTemp.textContent = `${maxTempFixed}\u00B0 | ${lowTempFixed}\u00B0F`;
 
         const windSpeedFixed = day.wind_speed.toFixed(0);
         windSpeed.textContent = `Wind: ${windSpeedFixed} \u006D\u0070\u0068`;
-        // windChill(day.wind.speed, day.main.temp);
 
         const weatherDescription = day.weather[0].description;
         const descriptionWords = weatherDescription.split(" ");
@@ -141,15 +130,13 @@ function displayResults(weatherdata) {
         const sunriseString = new Date(sunriseEpoch*1000).toLocaleTimeString('en-US', {hours: 'number'})
         sunRise.textContent = `Sunrise: ${sunriseString}`;
 
-
         const sunsetEpoch = new Date(day.sunset);
         const sunsetString = new Date(sunsetEpoch*1000).toLocaleTimeString('en-US', {hours: 'number'})
         sunSet.textContent = `Sunset: ${sunsetString}`;
 
         const pressure = day.pressure.toFixed(0);
-        pressurE.textContent = `Pressure:${pressure}`;
+        pressurE.textContent = `Pressure:${pressure} hPa`;
 
-        // get UV index day.uvi     
         const uvI = day.uvi.toFixed(0);
         uvIndex.textContent = `UV Index: ${uvI} / 11`;
 
