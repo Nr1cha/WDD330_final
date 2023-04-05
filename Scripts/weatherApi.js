@@ -74,18 +74,19 @@ function displayResults(weatherdata) {
         weatherBox.appendChild(windSpeed);
         weatherBox.appendChild(humidity);
 
-        // const windChill = document.querySelector("wind-chill");
-
-        // adding data from the API to the page
+        // ADDING DATA FROM THE API TO THE PAGE
         const currentTempFixed = day.main.temp.toFixed(0);
         currentTemp.textContent = `${currentTempFixed}\u00B0F`;
 
+        // TODO MAKE A HIGH TEMP
+        
+
+        // TODO MAKE A LOW TEMP
+
         const windSpeedFixed = day.wind.speed.toFixed(0);
         windSpeed.textContent = `Wind: ${windSpeedFixed} \u006D\u0070\u0068`;
-        // console.log(day.wind.speed, day.main.temp, windChill )
         // windChill(day.wind.speed, day.main.temp);
 
-        // weatherIcon.src = `https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`;
         const weatherDescription = day.weather[0].description;
         const descriptionWords = weatherDescription.split(" ");
 
