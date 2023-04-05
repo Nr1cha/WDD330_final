@@ -67,8 +67,7 @@ function displayResults(weatherdata) {
         const weatherBox = document.createElement("div")
         const weatherIcon = document.createElement("img");
         const currentTemp = document.createElement("p");
-        const maxTemp = document.createElement("p");
-        const lowTemp = document.createElement("p");
+        const maxMinTemp = document.createElement("p");
         const windSpeed = document.createElement("p");
         const captionDesc = document.createElement("p");
         const humidity = document.createElement("p");
@@ -81,8 +80,7 @@ function displayResults(weatherdata) {
             `https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`
         );
         currentTemp.classList.add("current-temp");
-        maxTemp.classList.add("max-temp");
-        lowTemp.classList.add("low-temp");
+        maxMinTemp.classList.add("maxMin-temp");
         windSpeed.classList.add("wind-speed");
         captionDesc.classList.add("caption-desc");
         humidity.classList.add("humidity");
@@ -91,8 +89,7 @@ function displayResults(weatherdata) {
         weatherContainer.appendChild(weatherBox);
         weatherBox.appendChild(weatherIcon);
         weatherBox.appendChild(currentTemp);
-        weatherBox.appendChild(maxTemp);
-        weatherBox.appendChild(lowTemp);
+        weatherBox.appendChild(maxMinTemp);
         weatherBox.appendChild(captionDesc);
         weatherBox.appendChild(windSpeed);
         weatherBox.appendChild(humidity);
@@ -101,15 +98,9 @@ function displayResults(weatherdata) {
         const currentTempFixed = day.temp.day.toFixed(0);
         currentTemp.textContent = `${currentTempFixed}\u00B0F`;
 
-        // TODO MAKE A HIGH TEMP
         const maxTempFixed = day.temp.max.toFixed(0);
-        maxTemp.textContent = `${maxTempFixed}\u00B0F`;
-
-
-        // TODO MAKE A LOW TEMP
         const lowTempFixed = day.temp.min.toFixed(0);
-        lowTemp.textContent = `${lowTempFixed}\u00B0F`;
-
+        maxMinTemp.textContent = `${maxTempFixed}\u00B0 | ${lowTempFixed}\u00B0F`;
 
         const windSpeedFixed = day.wind_speed.toFixed(0);
         windSpeed.textContent = `Wind: ${windSpeedFixed} \u006D\u0070\u0068`;
