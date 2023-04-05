@@ -50,6 +50,7 @@ function displayResults(weatherdata) {
         const weatherBox = document.createElement("div")
         const weatherIcon = document.createElement("img");
         const currentTemp = document.createElement("p");
+        const maxTemp = document.createElement("p");
         const windSpeed = document.createElement("p");
         const captionDesc = document.createElement("p");
         const humidity = document.createElement("p");
@@ -62,6 +63,8 @@ function displayResults(weatherdata) {
             `https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`
         );
         currentTemp.classList.add("current-temp");
+        maxTemp.classList.add("max-temp");
+
         windSpeed.classList.add("wind-speed");
         captionDesc.classList.add("caption-desc");
         humidity.classList.add("humidity");
@@ -70,6 +73,7 @@ function displayResults(weatherdata) {
         weatherContainer.appendChild(weatherBox);
         weatherBox.appendChild(weatherIcon);
         weatherBox.appendChild(currentTemp);
+        weatherBox.appendChild(maxTemp);
         weatherBox.appendChild(captionDesc);
         weatherBox.appendChild(windSpeed);
         weatherBox.appendChild(humidity);
@@ -79,7 +83,9 @@ function displayResults(weatherdata) {
         currentTemp.textContent = `${currentTempFixed}\u00B0F`;
 
         // TODO MAKE A HIGH TEMP
-        
+        const maxTempFixed = day.main.temp_max.toFixed(0);
+        maxTemp.textContent = `${maxTempFixed}\u00B0F`;
+
 
         // TODO MAKE A LOW TEMP
 
