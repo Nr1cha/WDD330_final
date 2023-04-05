@@ -58,10 +58,11 @@ async function apiFetch(userValue = "seattle") {
 
 // display the results in the weather cell section
 function displayResults(weatherdata) {
+    const weatherContainer = document.querySelector("#weather-item"); // get the parent container
+    weatherContainer.innerHTML = "";
     // console.log(weatherdata);
     weatherdata.daily.forEach((day) => {
-        const weatherContainer = document.querySelector("#weather-item"); // get the parent container
-
+        
         // creating child elements
         const weatherBox = document.createElement("div")
         const weatherIcon = document.createElement("img");
