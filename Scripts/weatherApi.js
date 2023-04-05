@@ -74,6 +74,7 @@ function displayResults(weatherdata) {
         const captionDesc = document.createElement("p");
         const humidity = document.createElement("p");
         const pressurE = document.createElement("p");
+        const uvIndex = document.createElement("p");
         const sunRise = document.createElement("p");
         const sunSet = document.createElement("p");
 
@@ -92,6 +93,7 @@ function displayResults(weatherdata) {
         captionDesc.classList.add("caption-desc");
         humidity.classList.add("humidity");
         pressurE.classList.add("pressure");
+        uvIndex.classList.add("uv_index");
         sunRise.classList.add("sunrise");
         sunSet.classList.add("sunSet");
 
@@ -106,6 +108,7 @@ function displayResults(weatherdata) {
         weatherBox.appendChild(windSpeed);
         weatherBox.appendChild(humidity);
         weatherBox.appendChild(pressurE);
+        weatherBox.appendChild(uvIndex);
         weatherBox.appendChild(sunRise);
         weatherBox.appendChild(sunSet);
 
@@ -143,11 +146,12 @@ function displayResults(weatherdata) {
         const sunsetString = new Date(sunsetEpoch*1000).toLocaleTimeString('en-US', {hours: 'number'})
         sunSet.textContent = `Sunset: ${sunsetString}`;
 
-        // get pressure day.pressure
         const pressure = day.pressure.toFixed(0);
         pressurE.textContent = `Pressure:${pressure}`;
 
-        // get UV index day.uvi        
+        // get UV index day.uvi     
+        const uvI = day.uvi.toFixed(0);
+        uvIndex.textContent = `UV Index: ${uvI} / 11`;
 
     });
 }
