@@ -61,6 +61,8 @@ function displayResults(weatherdata) {
     const weatherContainer = document.querySelector("#weather-item"); // get the parent container
     weatherContainer.innerHTML = "";
     // console.log(weatherdata);
+    // GET THE CURRENT TEMP FOR THE CURRENT DAY ONLY BUT OUTSIDE THE LOOP
+    
     weatherdata.daily.forEach((day) => {
         
         // creating child elements
@@ -129,16 +131,19 @@ function displayResults(weatherdata) {
         const humidity1 = day.humidity.toFixed(0);
         humidity.textContent = `Humidity: ${humidity1}\u0025`;
 
-        // sunrise time
         const sunriseEpoch = new Date(day.sunrise);
         const sunriseString = new Date(sunriseEpoch*1000).toLocaleTimeString('en-US', {hours: 'number'})
         sunRise.textContent = `Sunrise: ${sunriseString}`;
 
 
-        // sunset time
         const sunsetEpoch = new Date(day.sunset);
         const sunsetString = new Date(sunsetEpoch*1000).toLocaleTimeString('en-US', {hours: 'number'})
         sunSet.textContent = `Sunset: ${sunsetString}`;
+
+        // get pressure day.pressure
+
+        // get UV index day.uvi
+        
 
     });
 }
