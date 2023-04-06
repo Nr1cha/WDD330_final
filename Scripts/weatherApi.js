@@ -74,6 +74,7 @@ function displayResults({ weatherdata, location } = {}) {
 
     weatherdata.daily.forEach((day, index) => {
         const weatherBox = document.createElement("div");
+        const dateFormatted = document.createElement("p");
         const weatherIcon = document.createElement("img");
         const currentTemp = document.createElement("p");
         const maxMinTemp = document.createElement("p");
@@ -102,6 +103,7 @@ function displayResults({ weatherdata, location } = {}) {
         sunSet.classList.add("sunSet");
 
         weatherContainer.appendChild(weatherBox);
+        weatherBox.appendChild(dateFormatted);
         weatherBox.appendChild(weatherIcon);
         weatherBox.appendChild(currentTemp);
         weatherBox.appendChild(maxMinTemp);
@@ -112,11 +114,13 @@ function displayResults({ weatherdata, location } = {}) {
         weatherBox.appendChild(uvIndex);
         weatherBox.appendChild(sunRise);
         weatherBox.appendChild(sunSet);
-
         let currentTempFixed;
         if (index === 0) {
             currentTempFixed = weatherdata.current.temp.toFixed(0);
+            dateFormatted.textContent = `Today`;
         } else {
+            let formattedDate = formatToday(day.dt);
+            dateFormatted.textContent = `${formattedDate}`;
             currentTempFixed = day.temp.day.toFixed(0);
         }
 
@@ -160,6 +164,8 @@ function displayResults({ weatherdata, location } = {}) {
 
         const uvI = day.uvi.toFixed(0);
         uvIndex.textContent = `UV Index: ${uvI} / 11`;
+
+
     });
 }
 
