@@ -23,7 +23,7 @@ favoritesListSearch.addEventListener("change", async (event) => {
 });
 
 // API URL
-async function latLong(userValue = "seattle"){
+async function latLong(userValue = "seattle") {
     try {
         const url = `https://api.openweathermap.org/geo/1.0/direct?q=${userValue}&appid=72c90fbdfbdb409e818bc324052dfcd3&limit=1`; // get lat long
         const response = await fetch(url);
@@ -36,7 +36,6 @@ async function latLong(userValue = "seattle"){
     } catch (error) {
         console.log(error);
     }
-
 }
 async function apiFetch(userValue = "seattle") {
     try {
@@ -44,8 +43,11 @@ async function apiFetch(userValue = "seattle") {
         const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${location[0].lat}&lon=${location[0].lon}&units=imperial&appid=72c90fbdfbdb409e818bc324052dfcd3&cnt=8`;
         const response = await fetch(url);
         if (response.ok) {
-            const data = await response.json();
-            return data;
+            const weatherdata = await response.json();
+            return {
+                weatherdata,
+                location
+            };
         } else {
             throw Error(await response.text());
         }
@@ -54,13 +56,24 @@ async function apiFetch(userValue = "seattle") {
     }
 }
 
+function formatToday(epochDate) {
+    return  new Date(epochDate * 1000).toLocaleDateString("en-US", {weekday: 'short', day: 'numeric', month: 'numeric'})
+}
+
 // display the results in the weather cell section
-function displayResults(weatherdata) {
+function displayResults({ weatherdata, location } = {}) {
     const weatherContainer = document.querySelector("#weather-item");
     weatherContainer.innerHTML = "";
+
+    // CREATING LOCATION TAGS
+    const locationContainer = document.querySelector("#location-container");
+    locationContainer.innerHTML = "";
+    const locationName = document.createElement("p");
+    locationName.innerText = location[0].name;
+    locationContainer.appendChild(locationName);
+
     weatherdata.daily.forEach((day, index) => {
-        
-        const weatherBox = document.createElement("div")
+        const weatherBox = document.createElement("div");
         const weatherIcon = document.createElement("img");
         const currentTemp = document.createElement("p");
         const maxMinTemp = document.createElement("p");
@@ -101,7 +114,7 @@ function displayResults(weatherdata) {
         weatherBox.appendChild(sunSet);
 
         let currentTempFixed;
-        if(index === 0) {
+        if (index === 0) {
             currentTempFixed = weatherdata.current.temp.toFixed(0);
         } else {
             currentTempFixed = day.temp.day.toFixed(0);
@@ -119,7 +132,9 @@ function displayResults(weatherdata) {
         const descriptionWords = weatherDescription.split(" ");
 
         for (let i = 0; i < descriptionWords.length; i++) {
-            descriptionWords[i] = descriptionWords[i][0].toUpperCase() + descriptionWords[i].substr(1);
+            descriptionWords[i] =
+                descriptionWords[i][0].toUpperCase() +
+                descriptionWords[i].substr(1);
         }
         captionDesc.textContent = descriptionWords.join(" ");
 
@@ -127,11 +142,17 @@ function displayResults(weatherdata) {
         humidity.textContent = `Humidity: ${humidity1}\u0025`;
 
         const sunriseEpoch = new Date(day.sunrise);
-        const sunriseString = new Date(sunriseEpoch*1000).toLocaleTimeString('en-US', {hours: 'number'})
+        const sunriseString = new Date(sunriseEpoch * 1000).toLocaleTimeString(
+            "en-US",
+            { hours: "number" }
+        );
         sunRise.textContent = `Sunrise: ${sunriseString}`;
 
         const sunsetEpoch = new Date(day.sunset);
-        const sunsetString = new Date(sunsetEpoch*1000).toLocaleTimeString('en-US', {hours: 'number'})
+        const sunsetString = new Date(sunsetEpoch * 1000).toLocaleTimeString(
+            "en-US",
+            { hours: "number" }
+        );
         sunSet.textContent = `Sunset: ${sunsetString}`;
 
         const pressure = day.pressure.toFixed(0);
@@ -139,7 +160,6 @@ function displayResults(weatherdata) {
 
         const uvI = day.uvi.toFixed(0);
         uvIndex.textContent = `UV Index: ${uvI} / 11`;
-
     });
 }
 
