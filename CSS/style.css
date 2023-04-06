@@ -33,9 +33,9 @@ h1 {
     text-align: center;
 }
 
-#weather-item > div {
+#weather-item>div {
     margin: 15px;
-    background-image: radial-gradient( rgb(39,130,218),rgb(18, 73, 167));
+    background-image: radial-gradient(rgb(39, 130, 218), rgb(18, 73, 167));
     padding: 5px;
     border-radius: 1rem;
 }
@@ -55,31 +55,22 @@ h1 {
     margin: 1rem;
 }
 
-/* FAVORITE BUTTON */
-#addToFav {
-    background-color: #4caf5000;
-    margin: 8px 0;
-    padding: 0;
-    border: none;
-    cursor: pointer;
+#weather-item>div>p:first-of-type {
+    font-size: 2rem;
 }
 
-#weather-item > div > p:first-of-type {
-    font-size: 2rem;
-}
-#weather-item > div > p:nth-of-type(2) {
+#weather-item>div>p:nth-of-type(2) {
     font-size: 2rem;
     margin: 0;
 }
-#weather-item > div > p:nth-of-type(3) {
+
+#weather-item>div>p:nth-of-type(3) {
     margin: 0;
 }
-#weather-item > div > p:nth-of-type(4) {
+
+#weather-item>div>p:nth-of-type(4) {
     margin-bottom: 3rem;
 }
-
-
-/* #weather-item > div:nth-child(1) > p.maxMin-temp */
 
 /* SPECIFIC WEATHER ITEM STYLING */
 .current-temp {
@@ -102,11 +93,35 @@ footer {
 }
 
 
-#location-container, #addToFav {
+#location-container,
+#addToFav {
     display: inline-block;
     flex-direction: column;
     margin: 0 auto;
     font-size: 2rem;
-    /* justify-content: center;
-    align-items: center; */
+}
+
+#addToFav {
+    background-color: #d3a656a8;
+    margin: 0px 10px 0px 10px;
+    padding: 4px 4px;
+    border: none;
+    border-radius: 20%;
+    cursor: pointer;
+    font-size: 1.6rem;
+}
+
+@media screen and (min-width:1024px) {
+    #weather-item {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    #weather-item>div * {
+        flex-basis: calc(1.1% - 1px);
+        margin-bottom: 1px;
+    }
+
 }
