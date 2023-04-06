@@ -51,6 +51,10 @@ h1 {
     box-sizing: border-box;
 }
 
+#drowdownList {
+    margin: 1rem;
+}
+
 /* FAVORITE BUTTON */
 #addToFav {
     background-color: #4caf5000;
@@ -58,17 +62,30 @@ h1 {
     padding: 0;
     border: none;
     cursor: pointer;
-
 }
 
+#weather-item > div > p:first-of-type {
+    font-size: 2rem;
+}
+#weather-item > div > p:nth-of-type(2) {
+    font-size: 2rem;
+    margin: 0;
+}
+#weather-item > div > p:nth-of-type(3) {
+    margin: 0;
+}
+#weather-item > div > p:nth-of-type(4) {
+    margin-bottom: 3rem;
+}
+
+
+/* #weather-item > div:nth-child(1) > p.maxMin-temp */
 
 /* SPECIFIC WEATHER ITEM STYLING */
 .current-temp {
     font-size: 2rem;
     margin: .5rem;
 }
-
-
 
 
 /* FOOTER */
