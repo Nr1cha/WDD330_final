@@ -81,7 +81,6 @@ function displayResults({ weatherdata, location } = {}) {
         const windSpeed = document.createElement("p");
         const captionDesc = document.createElement("p");
         const humidity = document.createElement("p");
-        const pressurE = document.createElement("p");
         const uvIndex = document.createElement("p");
         const sunRise = document.createElement("p");
         const sunSet = document.createElement("p");
@@ -97,7 +96,6 @@ function displayResults({ weatherdata, location } = {}) {
         windSpeed.classList.add("wind-speed");
         captionDesc.classList.add("caption-desc");
         humidity.classList.add("humidity");
-        pressurE.classList.add("pressure");
         uvIndex.classList.add("uv_index");
         sunRise.classList.add("sunrise");
         sunSet.classList.add("sunSet");
@@ -110,16 +108,15 @@ function displayResults({ weatherdata, location } = {}) {
         weatherBox.appendChild(captionDesc);
         weatherBox.appendChild(windSpeed);
         weatherBox.appendChild(humidity);
-        weatherBox.appendChild(pressurE);
         weatherBox.appendChild(uvIndex);
         weatherBox.appendChild(sunRise);
         weatherBox.appendChild(sunSet);
         let currentTempFixed;
         if (index === 0) {
             currentTempFixed = weatherdata.current.temp.toFixed(0);
-            dateFormatted.textContent = `Today`;
+            dateFormatted.textContent = `TODAY`;
         } else {
-            let formattedDate = formatToday(day.dt);
+            let formattedDate = formatToday(day.dt).toUpperCase().replace(",", " ");
             dateFormatted.textContent = `${formattedDate}`;
             currentTempFixed = day.temp.day.toFixed(0);
         }
@@ -159,12 +156,8 @@ function displayResults({ weatherdata, location } = {}) {
         );
         sunSet.textContent = `Sunset: ${sunsetString}`;
 
-        const pressure = day.pressure.toFixed(0);
-        pressurE.textContent = `Pressure:${pressure} hPa`;
-
         const uvI = day.uvi.toFixed(0);
         uvIndex.textContent = `UV Index: ${uvI} / 11`;
-
 
     });
 }
